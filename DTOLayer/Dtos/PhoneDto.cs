@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace DTOLayer.Dtos
 {
@@ -13,6 +14,9 @@ namespace DTOLayer.Dtos
         public double Price { get; set; }
         [Required(ErrorMessage = "City name cannot be empty!")]
         public string CityName { get; set; }
+        [Required(ErrorMessage = "Date os sharing cannot be empty!")]
+        public DateTime DateOfSharing { get; set; }
         public string? ImagePath { get; set; }
+        public IFormFile ImageFile { get; set; }
     }
 }
