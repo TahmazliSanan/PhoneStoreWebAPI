@@ -1,4 +1,6 @@
 using AutoMapper;
+using DataAccessLayer.Data;
+using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Configs;
 
 namespace Presentation
@@ -17,6 +19,10 @@ namespace Presentation
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<WebAppDatabaseContext>(options => options
+            .UseNpgsql(builder.Configuration
+            .GetConnectionString("Connection")));
 
             var mapperConfig = new MapperConfiguration(mc => mc
             .AddProfile(new MapperProfile()));
