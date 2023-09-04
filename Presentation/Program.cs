@@ -1,7 +1,9 @@
 using AutoMapper;
 using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
+using ServiceLayer.Abstracts;
 using ServiceLayer.Configs;
+using ServiceLayer.Implementations;
 
 namespace Presentation
 {
@@ -19,6 +21,8 @@ namespace Presentation
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<IPhoneService, PhoneService>();
 
             builder.Services.AddDbContext<WebAppDatabaseContext>(options => options
             .UseNpgsql(builder.Configuration
@@ -38,6 +42,7 @@ namespace Presentation
                 app.UseSwaggerUI();
             }
 
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
