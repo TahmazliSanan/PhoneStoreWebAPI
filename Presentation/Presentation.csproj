@@ -16,11 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
+    <Folder Include="wwwroot\photos\phone\" />
   </ItemGroup>
 
 </Project>
