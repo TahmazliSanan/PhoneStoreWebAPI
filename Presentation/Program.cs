@@ -1,9 +1,14 @@
+using AutoMapper;
+using ServiceLayer.Configs;
+
 namespace Presentation
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -12,6 +17,11 @@ namespace Presentation
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            var mapperConfig = new MapperConfiguration(mc => mc
+            .AddProfile(new MapperProfile()));
+
+            builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
             var app = builder.Build();
 
