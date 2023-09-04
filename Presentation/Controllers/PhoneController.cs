@@ -64,7 +64,7 @@ namespace Presentation.Controllers
 
         [HttpGet]
         [Route("phonedetails/{id}")]
-        public async Task<IActionResult> GetPhoneAsync([FromBody] int id)
+        public async Task<IActionResult> GetPhoneAsync(int id)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace Presentation.Controllers
 
         [HttpDelete]
         [Route("removephone/{id}")]
-        public async Task<IActionResult> DeletePhoneAsync([FromBody] int id)
+        public async Task<IActionResult> DeletePhoneAsync(int id)
         {
             try
             {
