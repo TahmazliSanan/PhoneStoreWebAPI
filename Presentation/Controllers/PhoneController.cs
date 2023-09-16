@@ -1,6 +1,7 @@
 ﻿using DTOLayer.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Abstracts;
+using System.Text;
 
 namespace Presentation.Controllers
 {
@@ -31,6 +32,8 @@ namespace Presentation.Controllers
                         var stream = new FileStream(location, FileMode.Create);
                         phoneDto.ImageFile.CopyTo(stream);
                         phoneDto.ImagePath = newImageName;
+                        //byte[] bytes = Encoding.ASCII.GetBytes(newImageName);
+                        //phoneDto.ImagePath = Convert.ToBase64String(bytes);
                     }
 
                     await _phoneService.CreateAsync(phoneDto);
