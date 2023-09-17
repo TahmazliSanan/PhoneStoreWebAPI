@@ -27,13 +27,12 @@ namespace Presentation.Controllers
                     if (phoneDto.ImageFile != null)
                     {
                         var extension = Path.GetExtension(phoneDto.ImageFile.FileName);
-                        var newImageName = Guid.NewGuid() + extension;
-                        var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos/phone/", newImageName);
-                        var stream = new FileStream(location, FileMode.Create);
+                        string fileName = $"p_{phoneDto.Id}_{Guid.NewGuid()}{extension}";
+                        Stream stream = new FileStream($"wwwroot/photos/phone/{fileName}", FileMode.OpenOrCreate);
                         phoneDto.ImageFile.CopyTo(stream);
-                        phoneDto.ImagePath = newImageName;
-                        //byte[] bytes = Encoding.ASCII.GetBytes(newImageName);
-                        //phoneDto.ImagePath = Convert.ToBase64String(bytes);
+                        phoneDto.ImagePath = fileName;
+                        stream.Close();
+                        stream.Dispose();
                     }
 
                     await _phoneService.CreateAsync(phoneDto);
@@ -91,11 +90,12 @@ namespace Presentation.Controllers
                     if (phoneDto.ImageFile != null)
                     {
                         var extension = Path.GetExtension(phoneDto.ImageFile.FileName);
-                        var newImageName = Guid.NewGuid() + extension;
-                        var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos/phone/", newImageName);
-                        var stream = new FileStream(location, FileMode.Create);
+                        string fileName = $"p_{phoneDto.Id}_{Guid.NewGuid()}{extension}";
+                        Stream stream = new FileStream($"wwwroot/photos/phone/{fileName}", FileMode.OpenOrCreate);
                         phoneDto.ImageFile.CopyTo(stream);
-                        phoneDto.ImagePath = newImageName;
+                        phoneDto.ImagePath = fileName;
+                        stream.Close();
+                        stream.Dispose();
                     }
 
                     await _phoneService.UpdateAsync(phoneDto);
